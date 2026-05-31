@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/css/formCifra.css" rel="stylesheet">
+    <link href="/css/menu.css" rel="stylesheet">
+
+    <script src="/js/scriptsCifra.js"></script>
+</head>
+
+<body>
+    <%- include('menu', locals) %>
+        <div class="form-container">
+
+            <h1>Confira os dados antes do envio</h1>
+
+            <form class="form" action="/cifras/criar" method="post">
+                <label>Artista</label>
+                <input type="text" name="artistaNome" value="<%= artistaNome %>" readonly>
+                <label>Música</label>
+
+                <input type="text" name="musicaNomeId" value="<%= musicaNome %>" readonly>
+
+                <input type="hidden" id="musicaId" name="musicaId" value="<%= musicaId %>">
+
+
+                <label>Cifra</label>
+
+                <textarea hidden id="editor-textarea" name="cifra" readonly><%= cifra_User %></textarea>
+
+                <div class="cifra"><%= cifra_User %></div>
+
+                <label>Tom</label>
+
+                <input type="text" name="tomMusica" value="<%= tomMusica %>" readonly>
+
+                <input type="hidden" id="tonalidade" name="tonalidade" value="<%= tonalidade %>">
+
+                <label>Comentário</label>
+
+                <input type="text" name="comentario" value="<%= comentario %>" readonly>
+
+                <button type="submit">
+                    Enviar
+                </button>
+
+            </form>
+
+        </div>
+
+        <div id="acordeBox"></div>
+
+</body>
+
+</html>

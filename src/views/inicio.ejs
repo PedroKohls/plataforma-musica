@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início</title>
+    <link href="/css/menu.css" rel="stylesheet">
+    <link href="/css/inicio.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="artista-header">
+        <%- include('menu') %>
+    </header>
+    <main class="main">
+        <div class="container">
+            <div class="continue-section">
+
+                <% if(ultimoCurso){ %>
+                    <a href="/cursos/<%= ultimoCurso.id %>">
+                        <h1>Continue onde parou:</h1>
+                        <div class="continue">
+                            <img src="/imagens/site/violão.jpg">
+                            <div class="info">
+                                <h2><%= ultimoCurso.nome %></h2>
+                                <p>Professor: <%= ultimoCurso.Professor?.nome || 'Não encontrado' %></p>
+                                <div class="progress-bar">
+                                    <div class="progress"></div>
+                                </div>
+                                <p>75% concluído</p>
+                            </div>
+                        </div>
+                    </a>
+                <% } %>
+
+                <div class="section-header">
+                    <h1>Cifras em alta</h1>
+                    <button class="more">Ver mais</button>
+                </div>
+                <div class="cards-grid">
+                    <% cifras.forEach(function(cifra) { %>
+                        <div class="card cifra-card">
+                            <a
+                                href="/musicas/<%= slugify(cifra.Musica.Artista.nome) %>-<%= cifra.Musica.Artista.id %>/<%= slugify(cifra.Musica.nome) %>-<%= cifra.Musica.id %>">
+                                <img src="/imagens/site/homem.avif">
+                                <div class="legenda">
+                                    <h3>
+                                        <%= cifra.Musica.Artista.nome %>
+                                    </h3>
+                                    <p>
+                                        <%= cifra.Musica.nome %>
+                                    </p>
+                                    <div class="mini-infos">
+                                        <span class="mini-info">🎵 <%= cifra.tom || "Tom" %></span>
+                                        <span class="mini-info">👁 <%= cifra.acessos || 0 %></span>
+                                        <% if (usuario && cifra.usuarioId===usuario.id) { %>
+                                            <span class="mini-info">👁 Editar </span>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <% }) %>
+                </div>
+                <div class="section-header">
+                    <h1>Artistas em alta</h1>
+                    <button class="more">Ver mais</button>
+                </div>
+                <div class="cards-grid">
+                    <% artistas.forEach(function(artista) { %>
+                        <div class="card artista-card">
+                            <a href="/artistas/<%= slugify(artista.nome) %>-<%= artista.id %>">
+                                <img src="/imagens/site/homem.avif">
+                                <div class="legenda">
+                                    <h3>
+                                        <%= artista.nome %>
+                                    </h3>
+                                    <div class="mini-infos">
+                                        <span class="mini-info">👁 <%= artista.acessos || 0 %></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <% }) %>
+                </div>
+                <div class="section-header">
+                    <h1>Cursos em alta</h1>
+                    <button class="more">Ver mais</button>
+                </div>
+                <div class="cards-grid">
+                    <% cursos.forEach(function(curso) { %>
+                        <div class="card curso-card">
+                            <a href="/cursos/<%= curso.id %>">
+                                <img src="/imagens/site/violão.jpg">
+                                <div class="legenda">
+                                    <h3>
+                                        <%= curso.nome %>
+                                    </h3>
+                                    <p>
+                                        <%= curso.descricao %>
+                                    </p>
+                                    <div class="mini-infos">
+                                        <span class="mini-info">📚 Curso</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

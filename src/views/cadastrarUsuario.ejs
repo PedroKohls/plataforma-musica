@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastro</title>
+
+    <link href="/css/cadastro.css" rel="stylesheet">
+
+    <script src="/js/buscas.js"></script>
+</head>
+
+<body>
+    <%- include('menu', locals) %>
+
+    <% if (typeof mensagem !=='undefined' && mensagem) { %>
+        <div class="alerta">
+            <%= mensagem %>
+        </div>
+        <% } %>
+
+            <div class="cadastro-container">
+                <form class="cadastro-form" method="POST" action="/formUsuario" enctype="multipart/form-data">
+                    <div class="card perfil-card">
+                        <h2>Seu Perfil</h2>
+                        <label for="imagem" class="foto-preview">
+                            <span>Foto de perfil</span>
+                            <input type="file" name="imagem" id="imagem" hidden>
+                        </label>
+                        <div class="campo">
+                            <label for="nome">Nome</label>
+                            <input type="text" name="nome" id="nome" required>
+                        </div>
+                        <div class="campo">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" required>
+                        </div>
+                        <div class="campo">
+                            <label for="senha">Senha</label>
+                            <input type="password" name="senha" id="senha" required>
+                        </div>
+                    </div>
+                    <div class="card preferencias-card">
+                        <h1>Sobre Você</h1>
+                        <div class="tipo-usuario">
+                            <h2>Como vai interagir?</h2>
+                            <div class="radios">
+                                <label class="radio-option">
+                                    <input type="radio" name="tipo" value="aluno" checked>
+                                    <span>Aluno</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="tipo" value="professor">
+                                    <span>Professor</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!--
+                        <div class="campo">
+                            <label>Quais seus gêneros preferidos?</label>
+                            <select name="generos">
+                                <option selected disabled>
+                                    Gêneros
+                                </option>
+                                <option>Rock</option>
+                                <option>Pop</option>
+                                <option>MPB</option>
+                                <option>Jazz</option>
+                                <option>Gospel</option>
+                            </select>
+                        </div>
+                        <div class="campo">
+                            <label>Quais são seus instrumentos favoritos?</label>
+                            <select name="instrumentos">
+                                <option selected disabled>
+                                    Instrumentos
+                                </option>
+                                <option>Violão</option>
+                                <option>Guitarra</option>
+                                <option>Piano</option>
+                                <option>Baixo</option>
+                                <option>Bateria</option>
+                            </select>
+                        </div>
+                        -->
+                        <button type="submit" class="btn-cadastro">
+                            Cadastrar Usuário
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+</body>
+
+</html>

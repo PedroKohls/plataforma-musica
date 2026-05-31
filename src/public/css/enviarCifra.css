@@ -1,0 +1,7 @@
+.auto-expand {
+    width: 100%;
+    min-height: 50px;
+    resize: none;
+    overflow: hidden;
+    font-family: monospace;
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Música</title>
+    <link href="/css/inicio.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <%- include('menu', locals) %>
+    </header>
+
+    <main class="container">
+        <h1>Detalhes da música</h1>
+        <div class="musica-detalhes">
+            <p><strong>Nome:</strong> <%= musica %></p>
+        </div>
+
+        <% if (cifras && cifras.length > 0) { %>
+            <h2>Versões encontradas</h2>
+            <ul>
+                <% cifras.forEach(function(cifra) { %>
+                    <li><a href="/cifras/<%= cifra.id %>">Cifra <%= cifra.id %> - <%= cifra.tom %></a></li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>Nenhuma cifra encontrada para esta música.</p>
+        <% } %>
+    </main>
+</body>
+
+</html>

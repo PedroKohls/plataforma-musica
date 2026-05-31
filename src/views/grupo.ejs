@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= grupo.nome %>
+    </title>
+    <link rel="stylesheet" href="/css/grupo.css">
+</head>
+
+<body>
+
+    <%- include('menu', locals) %>
+
+        <main class="grupo-container">
+            <header class="grupo-header">
+                <h1>
+                    <%= grupo.nome %>
+                </h1>
+
+                <% if(grupo.descricao){ %>
+                    <p>
+                        <%= grupo.descricao %>
+                    </p>
+                    <% } %>
+            </header>
+
+            <section class="mensagens">
+
+                <% if(mensagens.length===0){ %>
+
+                    <div class="sem-mensagens">
+                        Nenhuma mensagem enviada ainda.
+                    </div>
+
+                    <% } %>
+                        <% mensagens.forEach(mensagem=> { %>
+                            <div class="mensagem">
+                                <img src="/<%= mensagem.usuario.imagem %>" alt="Usuário">
+                                <div class="conteudo">
+                                    <div class="autor">
+                                        <%= mensagem.usuario.nome %>
+                                    </div>
+                                    <div class="texto">
+                                        <%= mensagem.conteudo %>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+            </section>
+
+            <section class="enviar-mensagem">
+                <form id="formMensagem">
+                    <input type="hidden" name="grupoId" value="<%= grupo.id %>">
+                    <textarea name="conteudo" placeholder="Digite uma mensagem..." required></textarea>
+                    <button type="submit">Enviar</button>
+                </form>
+            </section>
+
+        </main>
+</body>
+
+</html>

@@ -1,0 +1,183 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.topo {
+    width: 90%;
+    max-width: 30%;
+    margin: 20px auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.topo img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.dados {
+    flex: 1;
+    margin-left: 15px;
+}
+
+.dados h1 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.dados h2 {
+    font-size: 16px;
+    margin: 0;
+    color: #666;
+}
+
+.controles {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.controle {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #555;
+}
+
+.controle select {
+    margin-top: 5px;
+    padding: 8px 12px;
+
+    border-radius: 8px;
+    border: 1px solid #ccc;
+
+    background-color: white;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.topo select {
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+.layout {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.opcoes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    width: 200px;
+
+    position: sticky;
+    top: 20px;
+}
+
+.opcoes button {
+    background: #F59E0B;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: bold;
+}
+
+.opcoes button:hover {
+    background: #d97706;
+}
+
+.cifra {
+    flex: 1;
+
+    max-width: 100%;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    font-family: monospace;
+    font-size: 15px;
+    line-height: 1.6;
+
+    white-space: pre-wrap;
+}
+
+.cifra .acorde {
+    color: #3b82f6;
+}
+
+#acordeBox {
+    display: none;
+    position: absolute;
+    background: white;
+    border: none;
+    padding: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    pointer-events: auto;
+    border-radius: 10px;
+}
+
+#braco {
+    border-collapse: collapse;
+    margin-top: 5px;
+}
+
+#braco tr.traste td.casa-viola {
+    width: 30px;
+    height: 35px;
+    border: 1px solid #ccc;
+    position: relative;
+}
+
+.numero-casa {
+    border: none !important;
+    width: 35px !important;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 8px;
+    font-size: 13px;
+}
+
+.marcador {
+    display: block;
+    width: 15px;
+    height: 15px;
+    background-color: #8b5656;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.status-celula {
+    border: none !important;
+    height: 20px !important;
+    font-size: 14px;
+    color: #666;
+    vertical-align: bottom;
+}

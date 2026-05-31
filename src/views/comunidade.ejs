@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidade - CifraHub</title>
+
+    <link rel="stylesheet" href="/css/comunidade.css">
+    <script src="/js/buscas.js" defer></script>
+</head>
+
+<body>
+    <%- include('menu', locals) %>
+        <main class="container">
+
+            <section class="cabecalho-comunidade">
+                <div>
+                    <h1>Comunidade</h1>
+                    <p>Conecte-se com outros músicos, compartilhe experiências e tire dúvidas.</p>
+                </div>
+
+                <a href="criarGrupo">
+                    <button class="btn-criar">
+                        + Criar Grupo
+                    </button>
+                </a>
+            </section>
+
+            <section class="pesquisa">
+                <input type="text" class="busca" name="busca" autocomplete="off" placeholder="Pesquisar Grupos..."
+                    onkeyup="procurarGrupo(this.value)">
+
+                <ul id="lista_grupos"></ul>
+            </section>
+
+            <section class="meus-grupos">
+
+                <div class="titulo-secao">
+                    <h2>Meus Grupos</h2>
+                    <a href="#">Ver todos</a>
+                </div>
+
+                <div class="cards">
+
+                    <div class="card-grupo">
+                        <h3>Violão Avançado</h3>
+
+                        <p>
+                            Grupo oficial do curso de Violão Avançado.
+                        </p>
+
+                        <div class="info">
+                            <span>34 membros</span>
+                            <span>12 mensagens hoje</span>
+                        </div>
+
+                        <button>Acessar</button>
+                    </div>
+
+                    <div class="card-grupo">
+                        <h3>Rock Nacional</h3>
+
+                        <p>
+                            Discussões sobre bandas e músicas nacionais.
+                        </p>
+
+                        <div class="info">
+                            <span>127 membros</span>
+                            <span>5 mensagens hoje</span>
+                        </div>
+
+                        <button>Acessar</button>
+                    </div>
+
+                    <div class="card-grupo">
+                        <h3>Teoria Musical</h3>
+
+                        <p>
+                            Tire dúvidas sobre escalas, harmonia e ritmo.
+                        </p>
+
+                        <div class="info">
+                            <span>92 membros</span>
+                            <span>18 mensagens hoje</span>
+                        </div>
+
+                        <button>Acessar</button>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="grupos-populares">
+
+                <div class="titulo-secao">
+                    <h2>Grupos Populares</h2>
+                </div>
+
+                <div class="cards">
+
+                    <div class="card-grupo">
+                        <h3>Fingerstyle Brasil</h3>
+
+                        <p>
+                            Técnicas avançadas para violão fingerstyle.
+                        </p>
+
+                        <div class="info">
+                            <span>310 membros</span>
+                        </div>
+
+                        <button>Participar</button>
+                    </div>
+
+                    <div class="card-grupo">
+                        <h3>Blues para Iniciantes</h3>
+
+                        <p>
+                            Aprenda e compartilhe dicas sobre blues.
+                        </p>
+
+                        <div class="info">
+                            <span>180 membros</span>
+                        </div>
+
+                        <button>Participar</button>
+                    </div>
+
+                    <div class="card-grupo">
+                        <h3>Guitarra Solo</h3>
+
+                        <p>
+                            Técnicas de improvisação e solos.
+                        </p>
+
+                        <div class="info">
+                            <span>240 membros</span>
+                        </div>
+
+                        <button>Participar</button>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+</body>
+
+</html>

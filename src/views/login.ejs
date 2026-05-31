@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <script src="/js/buscas.js"></script>
+
+    <link href="/css/menu.css" rel="stylesheet">
+    <link href="/css/login.css" rel="stylesheet">
+</head>
+
+<body>
+    <%- include('menu', locals) %>
+
+        <% if (typeof mensagem !=='undefined' && mensagem) { %>
+            <div class="mensagem-alerta">
+                <%= mensagem %>
+            </div>
+            <% } %>
+
+                <main class="login-container">
+                    <div class="login-card">
+
+                        <div class="login-left">
+                            <div class="icone-login">
+                                🔐
+                            </div>
+                            <h1>Bem-vindo de volta</h1>
+                            <p>
+                                Entre na sua conta para acessar cifras,
+                                cursos e continuar seus estudos.
+                            </p>
+                        </div>
+
+                        <div class="login-right">
+
+                            <form class="form-login" action="/login" method="POST">
+                                <h2>Entrar</h2>
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="Digite seu email" required>
+
+                                <label for="senha">Senha</label>
+                                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+
+                                <button type="submit">Fazer login</button>
+
+                                <p class="cadastro-link">Não possui conta?
+                                    <a href="/formUsuario">Criar conta</a>
+                                </p>
+                            </form>
+
+                        </div>
+                    </div>
+                </main>
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+<script src="/js/funcoes.js" defer></script>
+<script src="/js/buscas.js" defer></script>
+
+<link href="/css/menu.css" rel="stylesheet">
+<header class="main-header">
+    <div class="container">
+
+        <div class="logo">
+            <img src="/imagens/site/logo.png" width="250" height="100" alt="Logo">
+        </div>
+
+        <div class="search">
+            <input type="text" class="busca" name="busca" autocomplete="off" placeholder="O que vai tocar hoje?"
+                onkeyup="procurarArtistaInicio(this.value)">
+
+            <ul id="lista_artistas"></ul>
+        </div>
+
+        <div class="options">
+            <a href="/listas"><button>Listas</button></a>
+            <a href="/cursos"><button>Cursos</button></a>
+            <a href="/comunidade"><button>Comunidade</button></a>
+
+            <% if (usuario) { %>
+
+                <div class="user-area">
+                    <div class="user-profile" id="userProfile">
+                        <div class="user-info">
+                            <span class="user-name">
+                                <%= usuario.nome %>
+                            </span>
+                        </div>
+                        <img src="/<%= usuario.imagem %>" class="userImg" id="userAvatar">
+                    </div>
+
+                    <div class="user-menu" id="userMenu">
+                        <div class="menu-header">
+                            <h3>Minha Conta</h3>
+                            <p>Bem-vindo de volta ☺</p>
+                        </div>
+
+                        <div class="apps-grid">
+
+                            <a href="/perfil" class="app-item">
+                                <div class="icon-circle purple">P</div>
+
+                                <div>
+                                    <strong>Perfil</strong>
+                                    <span>Editar conta</span>
+                                </div>
+                            </a>
+
+                            <a href="/favoritos" class="app-item">
+                                <div class="icon-circle orange">
+                                    ★
+                                </div>
+
+                                <div>
+                                    <strong>Favoritos</strong>
+                                    <span>Suas cifras</span>
+                                </div>
+                            </a>
+
+                            <a href="/historico" class="app-item">
+                                <div class="icon-circle blue">
+                                    H
+                                </div>
+
+                                <div>
+                                    <strong>Histórico</strong>
+                                    <span>Últimos acessos</span>
+                                </div>
+                            </a>
+
+                            <a href="/cursos" class="app-item">
+                                <div class="icon-circle green">
+                                    C
+                                </div>
+
+                                <div>
+                                    <strong>Cursos</strong>
+                                    <span>Continue estudando</span>
+                                </div>
+                            </a>
+
+                        </div>
+
+                        <div class="menu-footer">
+                            <a href="/logout" class="logout-link">
+                                <button class="logout-btn">
+                                    Logout
+                                </button>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <% } else { %>
+
+                    <a href="/login">
+                        <button id="login">
+                            Login
+                        </button>
+                    </a>
+
+                    <% } %>
+        </div>
+    </div>
+</header>
