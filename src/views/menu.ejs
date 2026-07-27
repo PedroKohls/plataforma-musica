@@ -1,48 +1,44 @@
-<script src="/js/funcoes.js" defer></script>
-<script src="/js/buscas.js" defer></script>
+<header class="menu-header">
+    <div class="menu-container">
 
-<link href="/css/menu.css" rel="stylesheet">
-<header class="main-header">
-    <div class="container">
-
-        <div class="logo">
+        <div class="menu-logo">
             <img src="/imagens/site/logo.png" width="250" height="100" alt="Logo">
         </div>
 
-        <div class="search">
+        <div class="menu-search">
             <input type="text" class="busca" name="busca" autocomplete="off" placeholder="O que vai tocar hoje?"
                 onkeyup="procurarArtistaInicio(this.value)">
 
             <ul id="lista_artistas"></ul>
         </div>
 
-        <div class="options">
+        <div class="menu-options">
             <a href="/listas"><button>Listas</button></a>
             <a href="/cursos"><button>Cursos</button></a>
             <a href="/comunidade"><button>Comunidade</button></a>
 
             <% if (usuario) { %>
 
-                <div class="user-area">
-                    <div class="user-profile" id="userProfile">
-                        <div class="user-info">
-                            <span class="user-name">
+                <div class="menu-user-area">
+                    <div class="menu-user-profile">
+                        <div class="menu-user-info">
+                            <span class="menu-user-name">
                                 <%= usuario.nome %>
                             </span>
                         </div>
-                        <img src="/<%= usuario.imagem %>" class="userImg" id="userAvatar">
+                        <img src="/<%= usuario.imagem %>" class="menu-user-img" id="userAvatar">
                     </div>
 
-                    <div class="user-menu" id="userMenu">
-                        <div class="menu-header">
+                    <div class="menu-dropdown" id="userMenu">
+                        <div class="menu-dropdown-header">
                             <h3>Minha Conta</h3>
                             <p>Bem-vindo de volta ☺</p>
                         </div>
 
-                        <div class="apps-grid">
+                        <div class="menu-grid">
 
-                            <a href="/perfil" class="app-item">
-                                <div class="icon-circle purple">P</div>
+                            <a href="/perfil" class="menu-item">
+                                <div class="menu-icon purple">P</div>
 
                                 <div>
                                     <strong>Perfil</strong>
@@ -50,8 +46,8 @@
                                 </div>
                             </a>
 
-                            <a href="/favoritos" class="app-item">
-                                <div class="icon-circle orange">
+                            <a href="/favoritos" class="menu-item">
+                                <div class="menu-icon orange">
                                     ★
                                 </div>
 
@@ -61,8 +57,8 @@
                                 </div>
                             </a>
 
-                            <a href="/historico" class="app-item">
-                                <div class="icon-circle blue">
+                            <a href="/historico" class="menu-item">
+                                <div class="menu-icon blue">
                                     H
                                 </div>
 
@@ -72,8 +68,8 @@
                                 </div>
                             </a>
 
-                            <a href="/cursos" class="app-item">
-                                <div class="icon-circle green">
+                            <a href="/cursos" class="menu-item">
+                                <div class="menu-icon green">
                                     C
                                 </div>
 
@@ -85,9 +81,9 @@
 
                         </div>
 
-                        <div class="menu-footer">
-                            <a href="/logout" class="logout-link">
-                                <button class="logout-btn">
+                        <div class="menu-dropdown-footer">
+                            <a href="/usuarios/logout" class="logout-link">
+                                <button class="menu-logout-btn">
                                     Logout
                                 </button>
                             </a>
@@ -99,7 +95,7 @@
 
                 <% } else { %>
 
-                    <a href="/login">
+                    <a href="/usuarios/login">
                         <button id="login">
                             Login
                         </button>

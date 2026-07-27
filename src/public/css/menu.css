@@ -1,16 +1,9 @@
-/* =========================
-   RESET
-========================= */
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* =========================
-   BASE
-========================= */
 
 body {
     background: #f5f7fa;
@@ -27,9 +20,6 @@ img {
     display: block;
 }
 
-/* =========================
-   TEXTOS
-========================= */
 
 h1 {
     color: #1e3a8a;
@@ -43,11 +33,7 @@ p {
     color: #5b5656;
 }
 
-/* =========================
-   CONTAINER GLOBAL
-========================= */
-
-.container {
+.menu-container {
     width: 100%;
     max-width: 1600px;
 
@@ -55,11 +41,7 @@ p {
     padding: 0 20px;
 }
 
-/* =========================
-   HEADER
-========================= */
-
-.main-header {
+.menu-header {
     background: #2f4f9f;
     padding: 15px 0;
 
@@ -67,39 +49,31 @@ p {
     z-index: 50;
 }
 
-.main-header .container {
+.menu-header .menu-container {
     display: flex;
     align-items: center;
     gap: 24px;
 }
 
-/* =========================
-   LOGO
-========================= */
-
-.logo {
+.menu-logo {
     flex-shrink: 0;
 
     display: flex;
     align-items: center;
 }
 
-.logo img {
+.menu-logo img {
     width: 220px;
     height: auto;
     object-fit: contain;
 }
 
-/* =========================
-   PESQUISA
-========================= */
-
-.search {
+.menu-search {
     flex: 1;
     position: relative;
 }
 
-.search input {
+.menu-search input {
     width: 100%;
 
     padding: 14px 20px;
@@ -118,7 +92,7 @@ p {
         transform 0.2s ease;
 }
 
-.search input:focus {
+.menu-search input:focus {
     box-shadow: 0 0 0 4px rgba(255,255,255,0.2);
 }
 
@@ -181,7 +155,7 @@ p {
    ÁREA DIREITA
 ========================= */
 
-.options {
+.menu-options {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -193,7 +167,7 @@ p {
    BOTÕES
 ========================= */
 
-.options button {
+.menu-options button {
     background: #F59E0B;
 
     border: none;
@@ -214,7 +188,7 @@ p {
         transform 0.2s ease;
 }
 
-.options button:hover {
+.menu-options button:hover {
     background: #d97706;
     transform: translateY(-2px);
 }
@@ -223,11 +197,11 @@ p {
    USER AREA
 ========================= */
 
-.user-area {
+.menu-user-area {
     position: relative;
 }
 
-.user-profile {
+.menu-user-profile {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -235,13 +209,13 @@ p {
     cursor: pointer;
 }
 
-.user-info {
+.menu-user-info {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 }
 
-.user-name {
+.menu-user-name {
     color: white;
     font-size: 14px;
     font-weight: bold;
@@ -252,11 +226,7 @@ p {
     font-size: 12px;
 }
 
-/* =========================
-   FOTO
-========================= */
-
-.userImg {
+.menu-user-img {
     width: 58px;
     height: 58px;
 
@@ -271,16 +241,12 @@ p {
         border-color 0.2s ease;
 }
 
-.user-profile:hover .userImg {
+.menu-user-profile:hover .menu-user-img {
     transform: scale(1.05);
     border-color: rgba(255,255,255,0.7);
 }
 
-/* =========================
-   MENU USUÁRIO
-========================= */
-
-.user-menu {
+.menu-dropdown {
     position: absolute;
 
     top: calc(100% + 14px);
@@ -303,7 +269,7 @@ p {
     display: none;
 }
 
-.user-menu.active {
+.menu-dropdown.active {
     display: block;
 }
 
@@ -311,16 +277,16 @@ p {
    HEADER MENU
 ========================= */
 
-.menu-header {
+.menu-dropdown-header {
     margin-bottom: 18px;
 }
 
-.menu-header h3 {
+.menu-dropdown-header h3 {
     font-size: 18px;
     color: #111827;
 }
 
-.menu-header p {
+.menu-dropdown-header p {
     margin-top: 5px;
 
     font-size: 14px;
@@ -332,13 +298,13 @@ p {
    GRID MENU
 ========================= */
 
-.apps-grid {
+.menu-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 14px;
 }
 
-.app-item {
+.menu-item {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -354,19 +320,19 @@ p {
         transform 0.2s ease;
 }
 
-.app-item:hover {
+.menu-item:hover {
     background: #e5e7eb;
     transform: translateY(-2px);
 }
 
-.app-item strong {
+.menu-item strong {
     display: block;
 
     color: #111827;
     font-size: 14px;
 }
 
-.app-item span {
+.menu-item span {
     display: block;
 
     margin-top: 2px;
@@ -380,7 +346,7 @@ p {
    ÍCONES
 ========================= */
 
-.icon-circle {
+.menu-icon {
     width: 42px;
     height: 42px;
 
@@ -417,14 +383,14 @@ p {
    FOOTER MENU
 ========================= */
 
-.menu-footer {
+.menu-dropdown-footer {
     margin-top: 20px;
     padding-top: 18px;
 
     border-top: 1px solid #e5e7eb;
 }
 
-.logout-btn {
+.menu-logout-btn {
     width: 100%;
 
     padding: 14px;
@@ -444,7 +410,7 @@ p {
         transform 0.2s ease;
 }
 
-.logout-btn:hover {
+.menu-logout-btn:hover {
     background: #dc2626;
     transform: translateY(-1px);
 }
@@ -455,51 +421,51 @@ p {
 
 @media (max-width: 1000px) {
 
-    .main-header .container {
+    .menu-header .menu-container {
         flex-wrap: wrap;
     }
 
-    .logo {
+    .menu-logo {
         width: 100%;
         justify-content: center;
     }
 
-    .search {
+    .menu-search {
         width: 100%;
         order: 3;
     }
 
-    .options {
+    .menu-options {
         margin-left: auto;
     }
 }
 
 @media (max-width: 700px) {
 
-    .main-header {
+    .menu-header {
         padding: 20px 0;
     }
 
-    .main-header .container {
+    .menu-header .menu-container {
         flex-direction: column;
         align-items: stretch;
     }
 
-    .options {
+    .menu-options {
         width: 100%;
         justify-content: center;
         flex-wrap: wrap;
     }
 
-    .user-profile {
+    .menu-user-profile {
         justify-content: center;
     }
 
-    .user-info {
+    .menu-user-info {
         align-items: center;
     }
 
-    .user-menu {
+    .menu-dropdown {
         right: 50%;
         transform: translateX(50%);
     }

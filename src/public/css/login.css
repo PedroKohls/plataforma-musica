@@ -67,6 +67,11 @@ body {
     margin-bottom: 25px;
 }
 
+.icone-login img {
+    border-radius: 50%;
+}
+
+
 .login-left h1 {
     margin: 0 0 15px 0;
 

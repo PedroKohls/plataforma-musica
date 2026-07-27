@@ -4,6 +4,13 @@
     padding: 20px;
 }
 
+.grupo-header img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .grupo-header {
     background: #fff;
     border-radius: 10px;

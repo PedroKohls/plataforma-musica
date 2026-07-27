@@ -15,6 +15,14 @@ async function salvarHistorico(usuarioId, tipo, referenciaId) {
                 }
             });
         }
+        if (tipo === "artista") {
+            await historicoModel.destroy({
+                where: {
+                    usuarioId,
+                    tipo: 'artista'
+                }
+            });
+        }
 
         await historicoModel.create({
             usuarioId,

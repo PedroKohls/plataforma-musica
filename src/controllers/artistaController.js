@@ -77,7 +77,7 @@ module.exports = {
         }
 
         const breadcrumb = artistaBreadcrumb(artistaData);
-        return res.render('visualizarArtista', { artista: artistaData, musicas, breadcrumb });
+        return res.render('artista', { artista: artistaData, musicas, breadcrumb });
     },
 
     store: async function (req, res) {

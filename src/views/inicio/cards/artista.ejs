@@ -1,0 +1,15 @@
+<div class="card artista-card">
+    <a href="/artistas/<%= slugify(artista.nome) %>-<%= artista.id %>">
+        <img src="<%= artista.imagem %>">
+        <div class="legenda">
+            <h3>
+                <%= artista.nome %>
+            </h3>
+            <div class="mini-infos">
+                <span>
+                    👁 <%= artista.acessos %>
+                </span>
+            </div>
+        </div>
+    </a>
+</div>

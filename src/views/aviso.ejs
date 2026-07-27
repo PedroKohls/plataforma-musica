@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/menu.css" rel="stylesheet">
+    <link href="/css/aviso.css" rel="stylesheet">
+</head>
+
+<body>
+    <%- include('menu', locals) %>
+
+    <div class="aviso-container <%= tipo %>">
+
+        <h1><%= titulo %></h1>
+
+        <p><%= mensagem %></p>
+
+        <% if (linkBotao) { %>
+            <a href="<%= linkBotao %>">
+                <button>
+                    <%= textoBotao %>
+                </button>
+            </a>
+        <% } %>
+
+    </div>
+</body>
+</html>

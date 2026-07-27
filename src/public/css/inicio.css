@@ -19,18 +19,18 @@ p {
     color: #5b5656;
 }
 
-header {
+.inicio-header {
     background: #2f4f9f;
     padding: 15px 40px;
 }
 
-header .container {
+.inicio-header .inicio-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.container {
+.inicio-container {
     width: 90%;
     max-width: 1600px;
 
@@ -39,79 +39,6 @@ header .container {
     padding: 30px 20px;
 
     box-sizing: border-box;
-}
-
-.logo {
-    width: 20%;
-
-    display: flex;
-    align-items: center;
-}
-
-.search {
-    flex: 1;
-
-    margin: 0 20px;
-
-    position: relative;
-}
-
-.search input {
-    width: 90%;
-
-    box-sizing: border-box;
-
-    padding: 10px 15px;
-
-    border-radius: 20px;
-
-    border: none;
-
-    font-size: 15px;
-}
-
-input::placeholder {
-    color: #000000;
-    opacity: 1;
-}
-
-.options {
-    display: flex;
-
-    gap: 10px;
-
-    justify-content: flex-end;
-
-    align-items: center;
-}
-
-.options button {
-    background: #F59E0B;
-
-    border: none;
-
-    padding: 8px 14px;
-
-    border-radius: 10px;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.options button:hover {
-    background: #d97706;
-}
-
-.userImg {
-    width: 65px;
-    height: 65px;
-
-    border-radius: 50%;
-
-    overflow: hidden;
-
-    object-fit: cover;
 }
 
 .continue-section {
@@ -174,7 +101,7 @@ input::placeholder {
     border-radius: 999px;
 }
 
-.section-header {
+.section-.inicio-header {
     display: flex;
 
     justify-content: space-between;
@@ -395,11 +322,11 @@ a {
 
 @media (max-width: 700px) {
 
-    header {
+    .inicio-header {
         padding: 15px 20px;
     }
 
-    header .container {
+    .inicio-header .inicio-container {
         flex-direction: column;
         gap: 20px;
     }
@@ -419,12 +346,12 @@ a {
         flex-wrap: wrap;
     }
 
-    .container {
+    .inicio-container {
         width: calc(100% - 30px);
         padding: 20px 0;
     }
 
-    .section-header {
+    .section-.inicio-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;

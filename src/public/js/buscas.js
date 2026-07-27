@@ -106,7 +106,7 @@ async function procurarGrupo(str) {
                 const a = document.createElement("a");
                 a.href = `/grupos/${grupo.slug}-${grupo.id}`;
                 const li = document.createElement("li");
-                a.textContent = grupo.nome;
+                a.textContent = grupo.nome + " (" + grupo.membros + " membros)";
                 li.appendChild(a);
                 lista.appendChild(li);
             });
@@ -116,44 +116,54 @@ async function procurarGrupo(str) {
     xmlhttp.send(null);
 }
 
+const formMensagem = document.getElementById("formMensagem");
+if (formMensagem) {
+    formMensagem.addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-document.getElementById("formMensagem").addEventListener("submit", async function (e) {
-    e.preventDefault();
+        const form = e.target;
+        const conteudo = form.conteudo.value;
+        const grupoId = form.grupoId.value;
 
-    const form = e.target;
-    const conteudo = form.conteudo.value;
-    const grupoId = form.grupoId.value;
+        if (!conteudo.trim()) return;
 
-    if (!conteudo.trim()) return;
+        const response = await fetch("/mensagens/enviar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                conteudo,
+                grupoId
+            })
+        });
 
-    const response = await fetch("/mensagens/enviar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            conteudo,
-            grupoId
-        })
+        const data = await response.json();
+
+        if (data.sucesso) {
+            adicionarMensagemNaTela(data.mensagem);
+            form.conteudo.value = "";
+        }
     });
-
-    const data = await response.json();
-
-    if (data.sucesso) {
-        adicionarMensagemNaTela(data.mensagem); 
-        form.conteudo.value = "";
-    }
-});
+}
 
 function procurarArtista() {
     const input = document.getElementById("input-artista");
+    const containerCheckboxArtista = document.getElementById("container-checkbox-artista");
     if (!input) return;
     const str = input.value.trim();
     const select = document.getElementById("selec_artistas");
+
     if (str.length === 0) {
         if (select) select.innerHTML = "";
+        if (containerCheckboxArtista) containerCheckboxArtista.classList.add("d-none");
         return;
     }
+
+    if (containerCheckboxArtista) {
+        containerCheckboxArtista.classList.remove("d-none");
+    }
+
     var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange = function () {
@@ -161,48 +171,85 @@ function procurarArtista() {
             const resposta = JSON.parse(xmlhttp.responseText);
             if (!select) return;
             select.innerHTML = "";
+
             resposta.Dados.forEach(function (artista) {
                 const option = document.createElement("option");
                 option.textContent = artista.nome;
                 option.value = artista.id;
                 select.appendChild(option);
-
             });
-            const option = document.createElement("option");
-            option.textContent = "Criar artista " + resposta.nomeArtista;
-            option.value = "novo|" + resposta.nomeArtista;
-            select.appendChild(option);
+
+            const checkboxInput = containerCheckboxArtista.querySelector(".form-check-input");
+            const checkboxLabel = containerCheckboxArtista.querySelector(".form-check-label");
+
+            if (resposta.Dados.length === 0) {
+                checkboxInput.checked = true;
+                checkboxInput.style.pointerEvents = "none";
+                checkboxInput.dispatchEvent(new Event('change'));
+            } else {
+                checkboxInput.checked = false;
+                checkboxInput.style.pointerEvents = "auto";
+                checkboxInput.dispatchEvent(new Event('change'));
+            }
+
+            if (checkboxLabel) {
+                checkboxLabel.textContent = "Criar artista: " + resposta.nomeArtista;
+            }
+            if (checkboxInput) {
+                checkboxInput.value = "novo|" + resposta.nomeArtista;
+            }
 
             if (select.options.length > 0) {
                 select.selectedIndex = 0;
             }
         }
-
     };
 
     xmlhttp.open("GET", `/buscar/artistas?nome=${encodeURIComponent(str)}`, true);
     xmlhttp.send(null);
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    const inputArtista = document.getElementById("input-artista");
+    const containerCheckboxArtista = document.getElementById("container-checkbox-artista");
+
+    if (inputArtista && containerCheckboxArtista) {
+        inputArtista.addEventListener('input', function () {
+            if (inputArtista.value.trim() !== "") {
+                containerCheckboxArtista.classList.remove("d-none");
+            } else {
+                containerCheckboxArtista.classList.add("d-none");
+            }
+        });
+    }
+});
+
+
 function procurarMusicaPorArtista() {
     const input = document.getElementById("input-musica");
+    const containerCheckboxMusica = document.getElementById("container-checkbox-musica");
     if (!input) return;
-
     const str = input.value.trim();
-    if (str.length === 0) return;
+    const select = document.getElementById("selec_musicas");
 
-    const artistaSelect = document.getElementById("selec_artistas");
-    const artistaId = artistaSelect ? artistaSelect.value : "";
-    if (!artistaId) return;
+    if (str.length === 0) {
+        if (select) select.innerHTML = "";
+        if (containerCheckboxMusica) containerCheckboxMusica.classList.add("d-none");
+        return;
+    }
+
+    if (containerCheckboxMusica) {
+        containerCheckboxMusica.classList.remove("d-none");
+    }
 
     var xmlhttp = new XMLHttpRequest();
+
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             const resposta = JSON.parse(xmlhttp.responseText);
-            const select = document.getElementById("selec_musicas");
             if (!select) return;
-            select.innerHTML = ""
-                ;
+            select.innerHTML = "";
+
             resposta.Dados.forEach(function (musica) {
                 const option = document.createElement("option");
                 option.textContent = musica.nome;
@@ -210,10 +257,23 @@ function procurarMusicaPorArtista() {
                 select.appendChild(option);
             });
 
-            const option = document.createElement("option");
-            option.textContent = "Criar musica " + resposta.nomeMusica;
-            option.value = "novo|" + resposta.nomeMusica;
-            select.appendChild(option);
+            const checkboxInput = containerCheckboxMusica.querySelector(".form-check-input");
+            const checkboxLabel = containerCheckboxMusica.querySelector(".form-check-label");
+
+            if (resposta.Dados.length === 0) {
+                checkboxInput.checked = true;
+                checkboxInput.style.pointerEvents = "none";
+            } else {
+                checkboxInput.checked = false;
+                checkboxInput.style.pointerEvents = "auto";
+            }
+
+            if (checkboxLabel) {
+                checkboxLabel.textContent = "Criar musica: " + resposta.nomeMusica;
+            }
+            if (checkboxInput) {
+                checkboxInput.value = "novo|" + resposta.nomeMusica;
+            }
 
             if (select.options.length > 0) {
                 select.selectedIndex = 0;
@@ -221,9 +281,24 @@ function procurarMusicaPorArtista() {
         }
     };
 
-    xmlhttp.open("GET", `/buscar/musicas?nome=${encodeURIComponent(str)}&artistaId=${encodeURIComponent(artistaId)}`, true);
+    xmlhttp.open("GET", `/buscar/musicas?nome=${encodeURIComponent(str)}`, true);
     xmlhttp.send(null);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const inputmusic = document.getElementById("input-musica");
+    const containerCheckboxMusica = document.getElementById("container-checkbox-musica");
+
+    if (inputmusic && containerCheckboxMusica) {
+        inputmusic.addEventListener('input', function () {
+            if (inputmusic.value.trim() !== "") {
+                containerCheckboxMusica.classList.remove("d-none");
+            } else {
+                containerCheckboxMusica.classList.add("d-none");
+            }
+        });
+    }
+});
 
 document.addEventListener("DOMContentLoaded", function () {
     const inputArtista = document.getElementById("input-artista");
@@ -239,141 +314,3 @@ document.addEventListener("DOMContentLoaded", function () {
         selectArtistas.addEventListener("change", procurarMusicaPorArtista);
     }
 });
-
-let contadorPaginas = 2;
-
-function openTab(evt, tabId) {
-    document.querySelectorAll(".pagina").forEach(p => p.classList.remove("show"));
-    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-    const paginaAlvo = document.getElementById(tabId);
-    if (paginaAlvo) paginaAlvo.classList.add("show");
-    if (evt) {
-        evt.currentTarget.classList.add("active");
-    } else {
-        const botoes = document.querySelectorAll(".tab-btn");
-        if (botoes.length > 0) {
-            botoes[botoes.length - 1].classList.add("active");
-        }
-    }
-}
-
-// Adicione este bloco para rodar quando a página carregar
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector(".editor-conteudo");
-
-    form.addEventListener("submit", (e) => {
-        // Varre todas as páginas criadas no editor
-        document.querySelectorAll(".pagina").forEach(pagina => {
-            const paginaId = pagina.id; // Ex: "pagina-1"
-            const containerCampos = pagina.querySelector(".campos-container");
-            let htmlGerado = "";
-
-            // Varre cada campo inserido dentro desta página específica
-            containerCampos.querySelectorAll(".mb-2").forEach(wrapper => {
-                const input = wrapper.querySelector("input[type='text'], textarea");
-
-                if (input) {
-                    const valor = input.value.trim();
-                    if (!valor) return; // Pula campos vazios
-
-                    // Identifica o tipo com base no placeholder ou classe para gerar a tag HTML
-                    if (input.placeholder === "Subtítulo") {
-                        htmlGerado += `<h3 class="curso-subtitulo">${valor}</h3>\n`;
-                    } else if (input.placeholder === "Parágrafo") {
-                        htmlGerado += `<p class="curso-paragrafo">${valor}</p>\n`;
-                    }
-                }
-
-                // Nota: Upload de arquivos físicos (imagens/PDFs) direto para String HTML 
-                // não funciona nativamente via hidden. Eles precisam ir como arquivos normais.
-            });
-
-            // Injeta o HTML gerado no input hidden correspondente desta página
-            const inputHidden = pagina.querySelector(".input-conteudo-html");
-            if (inputHidden) {
-                inputHidden.value = htmlGerado;
-            }
-        });
-    });
-});
-
-function criarPagina() {
-    const num = contadorPaginas;
-    const sidebar = document.querySelector(".sidebar");
-    const btnAdicionar = document.getElementById("adicionar");
-    const containerPaginas = document.querySelector(".paginas");
-    const aba = document.createElement("button");
-
-    aba.type = "button";
-    aba.classList.add("tab-btn");
-    aba.textContent = `Página ${num}`;
-    aba.onclick = (e) => openTab(e, `pagina-${num}`);
-
-    sidebar.insertBefore(aba, btnAdicionar);
-    const novaPagina = document.createElement("div");
-
-    novaPagina.classList.add("pagina");
-    novaPagina.id = `pagina-${num}`;
-    novaPagina.innerHTML = `
-        <input type="text" name="paginas[${num}][titulo]" placeholder="Título Principal da Página">
-        
-        <!-- O INPUT HIDDEN FICA AQUI DENTRO, UM POR PÁGINA -->
-        <input type="hidden" name="paginas[${num}][conteudo]" class="input-conteudo-html">
-        
-        <div class="campos-container" id="campos-pagina-${num}"></div>
-
-        <div class="menu-adicionar-campo mt-3">
-            <select id="tipo-campo-${num}" class="form-select d-inline-block w-auto me-2">
-                <option value="subtitulo">Subtítulo</option>
-                <option value="paragrafo">Parágrafo</option>
-            </select>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="adicionarCampo(${num})">+ Adicionar Campo</button>
-        </div>
-    `;
-
-    containerPaginas.appendChild(novaPagina);
-    openTab(null, `pagina-${num}`);
-    contadorPaginas++;
-}
-
-function adicionarCampo(numeroPagina) {
-    const tipo = document.getElementById(`tipo-campo-${numeroPagina}`).value;
-    const container = document.getElementById(`campos-pagina-${numeroPagina}`);
-
-    const wrapperDiv = document.createElement("div");
-    wrapperDiv.classList.add("mb-2", "p-2", "border", "rounded", "d-flex", "align-items-center", "gap-2");
-
-    // Input hidden que diz ao backend qual é o tipo deste elemento específico na ordem atual
-    let inputHtml = `<input type="hidden" name="paginas[${numeroPagina}][campos][][tipo]" value="${tipo}">`;
-
-    if (tipo === "imagem") {
-        inputHtml += `
-            <div class="flex-grow-1">
-                <label class="form-label small mb-1">Enviar Imagem:</label>
-                <input type="file" class="form-control" name="arquivos_paginas" accept="image/*">
-            </div>
-        `;
-    } else if (tipo === "arquivo") {
-        inputHtml += `
-            <div class="flex-grow-1">
-                <label class="form-label small mb-1">Enviar PDF:</label>
-                <input type="file" class="form-control" name="arquivos_paginas" accept=".pdf">
-            </div>
-        `;
-    } else if (tipo === "subtitulo") {
-        inputHtml += `<input type="text" class="form-control flex-grow-1" name="paginas[${numeroPagina}][campos][][valor]" placeholder="Subtítulo">`;
-    } else if (tipo === "paragrafo") {
-        inputHtml += `<textarea class="form-control flex-grow-1" name="paginas[${numeroPagina}][campos][][valor]" placeholder="Parágrafo" rows="2"></textarea>`;
-    }
-
-    wrapperDiv.innerHTML = `
-        ${inputHtml}
-        <button type="button" class="btn btn-danger btn-sm" onclick="this.parentElement.remove()" 
-        title="Deletar campo" style="margin-top: ${tipo === 'imagem' || tipo === 'arquivo' ? '22px' : '0px'};">
-            &times;
-        </button>
-    `;
-
-    container.appendChild(wrapperDiv);
-}
-

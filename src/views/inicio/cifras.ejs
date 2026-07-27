@@ -1,0 +1,8 @@
+<div class="section-header">
+    <h1>Cifras em alta</h1>
+</div>
+<div class="cards-grid">
+    <% cifras.forEach(cifra=> { %>
+        <%- include("cards/cifra",{cifra,usuario,slugify}) %>
+            <% }) %>
+</div>

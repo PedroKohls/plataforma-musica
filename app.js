@@ -25,7 +25,7 @@ require('./src/models/historico');
 require('./src/models/grupo');
 require('./src/models/grupo_usuario');
 require('./src/models/mensagem');
-//sequelize.sync();
+sequelize.sync();
 
 /*sessão*/
 app.use(session({
@@ -75,33 +75,15 @@ app.use(bodyParser.json());
 const inicioRoutes = require('./src/routes/inicio');
 app.use('/', inicioRoutes);
 
-const loginRoutes = require('./src/routes/login');
-app.use('/login', loginRoutes);
-
-const logoutRoutes = require('./src/routes/logout');
-app.use('/logout', logoutRoutes);
-
-const formUsuarioRoutes = require('./src/routes/formUsuario');
-app.use('/formUsuario', formUsuarioRoutes);
-
-const buscarArtistasRouter = require('./src/routes/buscarArtistas');
-app.use('/buscar/artistas', buscarArtistasRouter);
-
-const buscarGruposRouter = require('./src/routes/buscarGrupos');
-app.use('/buscar/grupos', buscarGruposRouter);
+const buscarRouter = require('./src/routes/buscar');
+app.use('/buscar', buscarRouter);
 
 const artistasRouter = require('./src/routes/artistas');
 app.use('/artistas', artistasRouter);
 app.use('/artista', artistasRouter);
 
-const buscarMusicasRouter = require('./src/routes/buscarMusicas');
-app.use('/buscar/musicas', buscarMusicasRouter);
-
 const musicasRouter = require('./src/routes/musicas');
 app.use('/musicas', musicasRouter);
-
-const criarCifraRoutes = require('./src/routes/criarCifra');
-app.use('/cifras/criar', criarCifraRoutes);
 
 const enviarMensagemRoutes = require('./src/routes/enviarMensagem');
 app.use('/mensagens/enviar', enviarMensagemRoutes);
@@ -109,20 +91,17 @@ app.use('/mensagens/enviar', enviarMensagemRoutes);
 const cifrasRouter = require('./src/routes/cifras');
 app.use('/cifras', cifrasRouter);
 
+const usuariosRouter = require('./src/routes/usuarios');
+app.use('/usuarios', usuariosRouter);
+
 const comunidadeRouter = require('./src/routes/comunidade');
 app.use('/comunidade', comunidadeRouter);
 
 const cursosRouter = require('./src/routes/curso');
 app.use('/cursos', cursosRouter);
 
-const enviarCursoRouter = require('./src/routes/enviarCurso');
-app.use('/enviarCurso', enviarCursoRouter);
-
-const buscarAcordesRouter = require('./src/routes/buscarAcordes');
-app.use('/buscar/acordes', buscarAcordesRouter);
-
-const selecionarMusicaRoutes = require('./src/routes/selecionarMusica');
-app.use('/selecionar/musica', selecionarMusicaRoutes);
+const avisoRouter = require('./src/routes/aviso');
+app.use('/aviso', avisoRouter);
 
 const historicoRoutes = require('./src/routes/historico');
 app.use('/historico', historicoRoutes);

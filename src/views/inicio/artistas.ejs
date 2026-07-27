@@ -1,0 +1,9 @@
+<div class="section-header">
+    <h1>Artistas em alta</h1>
+</div>
+
+<div class="cards-grid">
+    <% artistas.forEach(artista=> { %>
+        <%- include("cards/artista",{artista,slugify}) %>
+            <% }) %>
+</div>

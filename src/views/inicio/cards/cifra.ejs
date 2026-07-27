@@ -1,0 +1,26 @@
+<div class="card cifra-card">
+    <a
+        href="/musicas/<%= slugify(cifra.Musica.Artista.nome) %>-<%= cifra.Musica.Artista.id %>/<%= slugify(cifra.Musica.nome) %>-<%= cifra.Musica.id %>">
+        <img src="/imagens/site/homem.avif">
+
+        <div class="legenda">
+            <h3>
+                <%= cifra.Musica.Artista.nome %>
+            </h3>
+
+            <p>
+                <%= cifra.Musica.nome %>
+            </p>
+
+            <div class="mini-infos">
+                <span>
+                    🎵 <%= cifra.tom %>
+                </span>
+
+                <span>
+                    👁 <%= cifra.acessos %>
+                </span>
+            </div>
+        </div>
+    </a>
+</div>

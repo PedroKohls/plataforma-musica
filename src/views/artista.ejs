@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--Menu-->
+    <link href="/css/menu.css" rel="stylesheet">
+    <script src="/js/funcoes.js" defer></script>
+    <script src="/js/buscas.js" defer></script>
+     <!--Pagina-->
+    <link href="/css/vizualizarArtista.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <%- include('menu', locals) %>
+    </header>
+    <nav class="breadcrumb-container">
+        <% breadcrumb.forEach(function(item, index) { %>
+            <% if (item.link) { %>
+                <a href="<%= item.link %>">
+                    <%= item.nome %>
+                </a>
+
+            <% } else { %>
+                <span class="pagina-atual">
+                    <%= item.nome %>
+                </span>
+
+                <% } %>
+                    <% if (index < breadcrumb.length - 1) { %>
+                        <span class="separador">
+                            /
+                        </span>
+                    <% } %>
+        <% }) %>
+    </nav>
+
+    <div class="container">
+        <div class="artista">
+            <img src="/<%= artista.imagem %>"
+                width="250" height="250">
+            <h2>
+                <%= artista.nome %>
+            </h2>
+            <div class="options">
+                <button>Favoritar</button>
+                <button>Gostei</button>
+                <button>Não Gostei</button>
+            </div>
+        </div>
+
+        <div class="conteudo">
+            <h1>Músicas mais famosas</h1>
+            <div class="musicas">
+                <% musicas.forEach(function(musica) { %>
+                    <div class="musica">
+                        <a href="/musicas/<%= artista.slug %>-<%= artista.id %>/<%= musica.slug %>-<%= musica.id %>">
+                            <%= musica.nome %>
+                        </a>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
